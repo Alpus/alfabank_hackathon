@@ -5,13 +5,14 @@ module.exports = {
       ],
     },
     rpc: {
-        host: "34.208.247.57",
-        port: 8485
+        host: "localhost",
+        port: 8545
     },
     networks: {
         development: {
-            host: "34.208.247.57",
-            port: 8485,
+            // host: "34.208.247.57",
+            host: "localhost",
+            port: 8545,
             network_id: "*"
         }
     }

@@ -1,4 +1,7 @@
 docker stop blockchain
-docker run blockchain
-docker run -itd -p 8485:8545 --name blockchain blockchain:latest
+docker rm blockchain
+#docker run blockchain
+#docker run -itd -p localhost:8545 --name blockchain blockchain:latest
+
+docker run -itd -p 8545:8545 --name blockchain blockchain:latest
 
