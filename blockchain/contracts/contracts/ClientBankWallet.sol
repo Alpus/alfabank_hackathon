@@ -10,9 +10,8 @@ contract ClientBankWallet {
     event Execution(uint indexed transactionId);
     event ExecutionFailure(uint indexed transactionId);
     event Deposit(address indexed sender, uint value);
-    event OwnerAddition(address indexed owner);
-    event OwnerRemoval(address indexed owner);
     event RequirementChange(uint required);
+    event Decline(uint indexed transactionId);
 
     mapping (uint => Transaction) public transactions;
     mapping (uint => bool) public confirmations;
@@ -101,6 +100,19 @@ contract ClientBankWallet {
         confirmations[transactionId] = true;
         Confirmation(msg.sender, transactionId);
         executeTransaction(transactionId);
+    }
+    
+    
+    /// @dev Allows a bank to decline a transaction.
+    /// @param transactionId Transaction ID.
+    function declineTransaction(uint transactionId)
+        public
+        transactionExists(transactionId)
+        notConfirmed(transactionId, msg.sender)
+        onlyBank
+    {
+        delete transactions[transactionId];
+        Decline(transactionId);
     }
     
 
