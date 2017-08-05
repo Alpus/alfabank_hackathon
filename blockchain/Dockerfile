@@ -14,5 +14,6 @@ COPY contracts /opt/contracts
 WORKDIR /opt/contracts
 
 RUN yarn install
-ENTRYPOINT ["???"]
+RUN yarn add bcrypt
+ENTRYPOINT ["./run_testrpc.sh"]
 
