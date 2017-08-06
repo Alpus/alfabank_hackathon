@@ -142,8 +142,10 @@ contract ClientBankWallet {
         if (isConfirmed(transactionId)) {
             Transaction tx = transactions[transactionId];
             tx.executed = true;
-            if (tx.destination.call.value(tx.value)(tx.data))
+            if (tx.destination.call.value(tx.value)(tx.data)) {
                 Execution(transactionId);
+                delete transactions[transactionId];
+            }
             else {
                 ExecutionFailure(transactionId);
                 tx.executed = false;
